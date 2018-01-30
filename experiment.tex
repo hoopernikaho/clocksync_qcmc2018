@@ -1,0 +1,98 @@
+\documentclass[aps,pra,onecolumn, superscriptaddress]{revtex4}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{hyperref} 
+\usepackage{mathtools}
+
+% \documentclass[letterpaper,10pt]{article}
+% \usepackage{natbib}
+% \usepackage{osameet2}
+% \usepackage{hyperref}  
+
+%% standard packages and arguments should be modified as needed
+
+\usepackage{amsmath,amssymb}
+
+% \usepackage[pdftex,colorlinks=true,bookmarks=false,citecolor=blue,urlcolor=blue]{hyperref} %pdflatex
+% \usepackage[dvips,colorlinks=true,bookmarks=false,citecolor=blue,urlcolor=blue]{hyperref} %latex w/dvips 
+
+\begin{document}
+\section{Experimental Setup}
+      
+Following Ho et al.~\cite{Ho2009}, we denote the detection times recorded by Alice's (Bob's) local clock by $t\,(t')$. 
+If Alice and Bob's clock were located together detecting the same event, the difference between the detection times measured by their local clocks would be $\delta = t' - t$.
+We first conduct an experiment to determine this offset, under the controlled condition that the two clocks run at the same frequency. 
+We will lift this constraint in our future work by applying the algorithm described in~\cite{Ho2009}.
+A sketch of the setup is shown in Figure~\ref{fig:setup}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=16cm]{figures/setup_simplified.eps}
+  \caption{\label{fig:setup}
+  Time synchronization setup. Alice and Bob each have a source of time-correlated photon pairs produced by spontaneous paramateric down-conversion (SPDC) and a single photon detector. One member of the SPDC pair is detected locally at detector $D_A$ on Alice's side and at $D_B$ on Bob's side. The other member of the pair is sent to a single mode fiber. Each of the propagating photon has a chance of being detected on the remote side. Times of arrival for all detected photons are recorded in each lab with respect to a local clock. 
+  }
+\end{figure}
+
+Alice and Bob each generates time-correlated photon pairs (810 nm) from a collinear type-II SPDC process.
+At each source, the orthogonally polarised photons are separated by a PBS and sent to a 50:50 fibre beam-splitter (FBS).
+
+The FBS splits each pair probabilistically, such that one photon is transmitted through a 780 HP fibre, while the other is detected locally with an avalanche photodiode (APD).
+
+The events at each APD (Perkin Elmer C30902SH, temporal resolution of 495 ps) are time-stamped with individual timestamp units (temporal resolution of 125 ps). The absolute time recorded by each unit is derived by adding the elapsed time to the unix time evaluated upon the starting of the timestamp unit. 
+
+Both timestamp units are seeded with a common frequency reference in the form of a rubidium oscillator.
+
+% The unix time differences of Alice’s and Bob’s computers, and the time difference between the unix time evaluation and the start of the timestamp unit at each computer, both contribute to the clock offset $\delta$ between Alice and Bob.
+To determine the time difference betweeen the clocks, consider a photon pair produced at Alice's site. With finite probability, one photon of the pair is detected locally $D_A$ at time $t$, while the other propogates for $t_L$ over distance $L$ and detected at $D_B$ at time $t'$. The time difference between the time labels for any pair produced at Alice will be: 
+\begin{equation}
+t'-t=t_L + \delta
+\end{equation}
+
+Similarly for any pair produced at Bob's site:
+\begin{equation}
+t-t'=t_L - \delta
+\end{equation}
+
+To extract these time differences, we perform a cross correlation between the events on both sides. 
+% To efficiently perform this cross correlation, we apply the algorithm described in~\cite{Ho2009}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=16cm]{figures/g2/g2.eps}
+  \caption{\label{fig:g2}
+  Timing correlations of Alice and Bob's pair sources measured for various spatial separations between them.  
+  For each separation, a correlation measurement yields two coincidence peaks, 
+  one corresponding to each source.
+  The timing offset (spatial separation) between their clocks can be estimated from the mean position (separation) of each peak pair.
+  In this way, the timing offset and spatial separation between the clocks can be determined simulatneously.
+  Solid line: Gaussian fit used to estimate the mean position of each individual peak. 
+  Error bars: Poissonian standard deviation.
+  }
+\end{figure}
+
+For every value of $L$, we expect to observe two correlation peaks, one corresponding to each source.
+The left peak $t' - t = \delta - t_L$ (corresponds to pairs originating at Bob) and 
+the right peak $t' - t = \delta + t_L$ (corresponds to pairs originating at Alice).
+An estimate of $\delta$ can thus be derived directly from the mean of the peak positions. 
+Figure~\ref{fig:g2} shows four sets of correlation peak pairs obtained for different $L$.
+
+% To determine the peak position with a resolution better than that of the timestamp unit, we accumulate ~2000 data points for each peak distribution and fit it to a gaussian function. 
+
+In table~\ref{table:offsets}, we show that the timing offset $\delta$ estimated for various values of $L$ are in good agreement with each other.
+
+\begin{table}[htbp]
+\centering
+\label{table:offsets}
+\begin{tabular}{lllll}
+$L(m)$ & $\delta(ns)$\\
+ 1.7 & $-3827495.39\pm0.03$\\
+ 6.7 & $-3827495.44\pm0.03$ \\
+ 31.7 & $-3827495.37\pm0.03$\\
+ 51.7 & $-3827495.38\pm0.03$
+\end{tabular}
+\caption{Estimated clock offset $\delta$ between Alice and Bob's clocks for various spatial separations $L$.}
+\end{table}
+
+\bibliography{references}     
+
+\end{document}
