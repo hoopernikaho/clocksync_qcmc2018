@@ -19,11 +19,14 @@
 \begin{document}
 \section{Experimental Setup}
       
-Following Ho et al.~\cite{Ho2009}, we denote the detection times recorded by Alice's (Bob's) local clock by $t\,(t')$. 
-If Alice and Bob's clock were located together detecting the same event, the difference between the detection times measured by their local clocks would be $\delta = t' - t$.
-We first conduct an experiment to determine this offset, under the controlled condition that the two clocks run at the same frequency. 
-We will lift this constraint in our future work by applying the algorithm described in~\cite{Ho2009}.
-A sketch of the setup is shown in Figure~\ref{fig:setup}.
+% Following Ho et al.~\cite{Ho2009}, we denote the detection times recorded by Alice's (Bob's) local clock by $t\,(t')$.
+In general, Alice and Bob's clocks are not synchronized.
+With $t$ local time at Alice's, and $ t'$ local time at Bob's,
+we define the time offset $\delta = t' - t$.
+% When Alice and Bob's clock are located together detecting the same event, the difference between the detection times measured by their local clocks would be $\delta = t' - t$.
+We use the time correlation of photon pairs generated in SPDC to determine $\delta$.
+% We first conduct an experiment to determine this offset, under the controlled condition that the two clocks run at the same frequency. 
+% We will lift this constraint in our future work by applying the algorithm described in~\cite{Ho2009}.
 
 \begin{figure}[htbp]
   \centering
@@ -33,17 +36,20 @@ A sketch of the setup is shown in Figure~\ref{fig:setup}.
   }
 \end{figure}
 
-Alice and Bob each generates time-correlated photon pairs (810 nm) from a collinear type-II SPDC process.
-At each source, the orthogonally polarised photons are separated by a PBS and sent to a 50:50 fibre beam-splitter (FBS).
+A sketch of the experimental setup is shown in Figure~\ref{fig:setup}.
+The system is symmetrical: both Alice and Bob generate time-correlated photon pairs (810 nm) using collinear type-II SPDC.
+PBS's route the vertically polarized photons to local measurements, while the orthogonal component travels and is detected at the remote location.
 
-The FBS splits each pair probabilistically, such that one photon is transmitted through a 780 HP fibre, while the other is detected locally with an avalanche photodiode (APD).
+Photons are detected using avalanche photodiodes (Perkin Elmer C30902SH, measured jitter time of 495 \textbf{error!} ps).
+Detection events at each location are timestamped with temporal resolution 125~ps.
+% are time-stamped with individual timestamp units (temporal resolution of 125 ps). The absolute time recorded by each unit is derived by adding the elapsed time to the unix time evaluated upon the starting of the timestamp unit. 
 
-The events at each APD (Perkin Elmer C30902SH, temporal resolution of 495 ps) are time-stamped with individual timestamp units (temporal resolution of 125 ps). The absolute time recorded by each unit is derived by adding the elapsed time to the unix time evaluated upon the starting of the timestamp unit. 
-
-Both timestamp units are seeded with a common frequency reference in the form of a rubidium oscillator.
+% Both timestamp units are seeded with a common frequency reference in the form of a rubidium oscillator.
 
 % The unix time differences of Alice’s and Bob’s computers, and the time difference between the unix time evaluation and the start of the timestamp unit at each computer, both contribute to the clock offset $\delta$ between Alice and Bob.
-To determine the time difference betweeen the clocks, consider a photon pair produced at Alice's site. With finite probability, one photon of the pair is detected locally $D_A$ at time $t$, while the other propogates for $t_L$ over distance $L$ and detected at $D_B$ at time $t'$. The time difference between the time labels for any pair produced at Alice will be: 
+The cross correlation between the Alice's and Bob's event records shows two peaks. The time separation between peaks corresponds to, the midpoint instead is $\delta$.
+
+% To determine the time difference between the clocks, consider a photon pair produced at Alice's site. With finite probability, one photon of the pair is detected locally $D_A$ at time $t$, while the other propagates for $t_L$ over distance $L$ and detected at $D_B$ at time $t'$. The time difference between the time labels for any pair produced at Alice will be: 
 \begin{equation}
 t'-t=t_L + \delta
 \end{equation}
@@ -53,7 +59,7 @@ Similarly for any pair produced at Bob's site:
 t-t'=t_L - \delta
 \end{equation}
 
-To extract these time differences, we perform a cross correlation between the events on both sides. 
+% To extract these time differences, we perform a cross correlation between the events on both sides. 
 % To efficiently perform this cross correlation, we apply the algorithm described in~\cite{Ho2009}.
 
 \begin{figure}[htbp]
@@ -70,10 +76,11 @@ To extract these time differences, we perform a cross correlation between the ev
   }
 \end{figure}
 
-For every value of $L$, we expect to observe two correlation peaks, one corresponding to each source.
-The left peak $t' - t = \delta - t_L$ (corresponds to pairs originating at Bob) and 
-the right peak $t' - t = \delta + t_L$ (corresponds to pairs originating at Alice).
-An estimate of $\delta$ can thus be derived directly from the mean of the peak positions. 
+We repeated the experiment for different length $L$ of fiber connecting A and B locations.
+% For every value of $L$, we expect to observe two correlation peaks, one corresponding to each source.
+% The left peak $t' - t = \delta - t_L$ (corresponds to pairs originating at Bob) and 
+% the right peak $t' - t = \delta + t_L$ (corresponds to pairs originating at Alice).
+% An estimate of $\delta$ can thus be derived directly from the mean of the peak positions. 
 Figure~\ref{fig:g2} shows four sets of correlation peak pairs obtained for different $L$.
 
 % To determine the peak position with a resolution better than that of the timestamp unit, we accumulate ~2000 data points for each peak distribution and fit it to a gaussian function. 
