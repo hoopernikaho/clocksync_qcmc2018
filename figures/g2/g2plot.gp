@@ -1,3 +1,5 @@
+#!/usr/bin/gnuplot
+
 set terminal postscript eps color enhanced solid font 'Helvetica, 16pt'\
  size 8.6cm, 6cm  dl .5
 
@@ -10,8 +12,8 @@ set ytics 1000
 #set logscale y
 
 # labels
-set label '-3827495' at graph 0.805, graph -0.105
-set xlabel font 'Helvetica, 16pt' "t' - t (ns)" offset 0, 0.7
+# set label '-3827495' at graph 0.805, graph -0.105
+set xlabel font 'Helvetica, 16pt' "{/Symbol d}+3827495 (ns)" offset 0, 0.7
 set ylabel font 'Helvetica, 16pt' 'Coincidences' offset 1
 
 
